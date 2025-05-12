@@ -9,11 +9,12 @@
     body {
       margin: 0;
       font-family: 'Noto Sans SC', sans-serif;
-      background: linear-gradient(135deg, #f8c8d5, #f5a3c7, #f1b2d3);
+      background: linear-gradient(135deg, #fdf2f6, #fce4ec, #fae8f0);
       background-attachment: fixed;
       background-size: cover;
       color: #333;
       position: relative;
+      transition: background 0.5s ease;
     }
     body::before {
       content: "";
@@ -22,7 +23,7 @@
       background-image: url("sakura.png");
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.25;
+      opacity: 0.15;
       pointer-events: none;
       animation: sakura 15s infinite linear;
     }
@@ -46,6 +47,7 @@
       color: #d81b60;
       font-size: 3rem;
       font-weight: bold;
+      transition: color 0.3s ease;
     }
 
     .video-section {
@@ -54,6 +56,12 @@
       padding: 1.2rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
     }
 
     .video-section iframe {
@@ -68,6 +76,7 @@
       font-size: 1rem;
       color: #555;
       text-align: justify;
+      transition: color 0.3s ease;
     }
 
     .footer {
@@ -84,6 +93,7 @@
     .footer a {
       color: #d81b60;
       text-decoration: underline;
+      transition: color 0.3s ease;
     }
 
     @media (max-width: 600px) {
@@ -108,11 +118,11 @@
       <iframe src="https://www.youtube.com/embed/2KbJykxhjC8?vq=hd1080&rel=0" allowfullscreen></iframe>
       <div class="video-description">
         视频1简介：创建好社区，通过活动里面添加一个事件，创建群组。
-		<br>观看人群：创建者，普通用户可以不需要掌握
-			创建与第一次的设置，注意创建后不要取消社区活动，不要设置循环添加。
-		<br>备注1：不需要每个人都创建，建立群组的人创建即可。
-		<br>备注2：社区可以不加其他人
-		<br>备注3：群组名字不可修改 第一次创建就要想好
+        <br>观看人群：创建者，普通用户可以不需要掌握
+        创建与第一次的设置，注意创建后不要取消社区活动，不要设置循环添加。
+        <br>备注1：不需要每个人都创建，建立群组的人创建即可。
+        <br>备注2：社区可以不加其他人
+        <br>备注3：群组名字不可修改 第一次创建就要想好
       </div>
     </div>
 
@@ -121,8 +131,8 @@
       <iframe src="https://www.youtube.com/embed/K1asXuqYJWg?vq=hd1080&rel=0" allowfullscreen></iframe>
       <div class="video-description">
         视频2简介：加入社区创建的群组
-		<br>观看人群：普通用户需要掌握
-		<br>第一次自己先加入通话 生成邀请链接，聊天框发送第一条消息聊天界面才显示群组
+        <br>观看人群：普通用户需要掌握
+        <br>第一次自己先加入通话 生成邀请链接，聊天框发送第一条消息聊天界面才显示群组
       </div>
     </div>
 
@@ -131,7 +141,7 @@
       <iframe src="https://www.youtube.com/embed/ecGMjwwjBwc?vq=hd1080&rel=0" allowfullscreen></iframe>
       <div class="video-description">
         视频3简介：群组通话界面的使用
-		<br>涉及到：呼叫人员、静音麦克风、共享画面、麦克风简单的设置、过滤查找群组、之后再加入群组
+        <br>涉及到：呼叫人员、静音麦克风、共享画面、麦克风简单的设置、过滤查找群组、之后再加入群组
       </div>
     </div>
 
@@ -140,7 +150,7 @@
       <iframe src="https://www.youtube.com/embed/RAFoUei9cFE?vq=hd1080&rel=0" allowfullscreen></iframe>
       <div class="video-description">
         视频4简介：群组添加人员方法参考
-		<br>有时候添加的时候直接就进去群组了，不需要点接受。
+        <br>有时候添加的时候直接就进去群组了，不需要点接受。
       </div>
     </div>
   </div>
@@ -155,6 +165,8 @@
     const ctx = canvas.getContext("2d");
     let width, height;
     let petals = [];
+    let mouseTrail = [];
+    let mouse = { x: null, y: null };
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -167,36 +179,118 @@
     petalImage.src = "sakura.png";
 
     function createPetals() {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 30; i++) { // 增加到30个樱花
         petals.push({
           x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 10 + 10,
+          y: Math.random() * height * 0.5, // 初始位置更靠上半部分
+          r: Math.random() * 10 + 8, // 稍微缩小范围
           d: Math.random() * 2 + 1,
-          vx: Math.random() * 1 - 0.5,
-          vy: Math.random() * 1 + 0.5,
+          vx: (Math.random() * 4 - 2) * 1.5, // 更宽的水平速度范围
+          vy: Math.random() * 3 + 1, // 更宽的垂直速度范围
           angle: Math.random() * Math.PI * 2,
+          angleSpeed: Math.random() * 0.05 + 0.01, // 随机旋转速度
+          color: `hsl(${Math.random() * 60 + 300}, 70%, 60%)`
         });
       }
     }
 
+    function getVideoBounds() {
+      const videos = document.querySelectorAll('.video-section iframe');
+      const bounds = [];
+      videos.forEach(video => {
+        const rect = video.getBoundingClientRect();
+        bounds.push({
+          left: rect.left,
+          right: rect.right,
+          top: rect.top,
+          bottom: rect.bottom
+        });
+      });
+      return bounds;
+    }
+
+    // 视频播放控制
+    const iframes = document.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      iframe.contentWindow.addEventListener('play', () => {
+        iframes.forEach(otherIframe => {
+          if (otherIframe !== iframe) {
+            otherIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+        });
+      });
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouseTrail.push({
+        x: e.clientX,
+        y: e.clientY,
+        age: 0,
+        color: `hsl(${Math.random() * 60 + 300}, 70%, 60%)`
+      });
+      if (mouseTrail.length > 20) mouseTrail.shift();
+    });
+
     function drawPetals() {
       ctx.clearRect(0, 0, width, height);
+      const videoBounds = getVideoBounds();
+
+      mouseTrail.forEach((trail, i) => {
+        ctx.beginPath();
+        ctx.arc(trail.x, trail.y, 5 * (1 - trail.age / 20), 0, Math.PI * 2);
+        ctx.fillStyle = trail.color + (1 - trail.age / 20) + ')';
+        ctx.fill();
+        trail.age++;
+      });
+      mouseTrail = mouseTrail.filter(trail => trail.age < 20);
+
       for (let p of petals) {
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.angle);
+        ctx.globalAlpha = 0.8;
         ctx.drawImage(petalImage, -p.r / 2, -p.r / 2, p.r, p.r);
         ctx.restore();
 
+        // 鼠标推开效果
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const pushRadius = 100;
+          const pushStrength = 0.2;
+          if (distance < pushRadius) {
+            const force = (1 - distance / pushRadius) * pushStrength;
+            p.vx += (dx / distance) * force;
+            p.vy += (dy / distance) * force;
+          }
+        }
+
+        // 更新位置
         p.x += p.vx;
         p.y += p.vy;
-        p.angle += 0.01;
+        p.angle += p.angleSpeed; // 使用随机旋转速度
+        p.vx += (Math.random() - 0.5) * 0.1; // 添加随机扰动
+        p.vy += (Math.random() - 0.5) * 0.05; // 添加随机扰动
 
+        // 视频区域弹跳
+        videoBounds.forEach(bound => {
+          if (p.x > bound.left && p.x < bound.right && p.y > bound.top && p.y < bound.bottom) {
+            if (p.x - p.r < bound.left || p.x + p.r > bound.right) p.vx = -p.vx * 0.8;
+            if (p.y - p.r < bound.top || p.y + p.r > bound.bottom) p.vy = -p.vy * 0.8;
+          }
+        });
+
+        // 屏幕边界处理
         if (p.y > height) {
           p.y = -20;
           p.x = Math.random() * width;
+          p.vy = Math.random() * 3 + 1;
+          p.vx = (Math.random() * 4 - 2) * 1.5; // 重新随机化速度
         }
+        if (p.x < 0 || p.x > width) p.vx = -p.vx * 0.8;
       }
       requestAnimationFrame(drawPetals);
     }
