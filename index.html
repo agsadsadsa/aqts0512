@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>我的视频教程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      background: linear-gradient(135deg, #f8c8d5, #f5a3c7, #f1b2d3);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #333;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("sakura.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.25;
+      pointer-events: none;
+      animation: sakura 15s infinite linear;
+    }
+
+    @keyframes sakura {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #d81b60;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .video-section {
+      margin-bottom: 1.2rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .video-section iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .video-description {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #555;
+      text-align: justify;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+      background: rgba(255,255,255,0.9);
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+      border-top: 2px solid #fce4ec;
+    }
+
+    .footer a {
+      color: #d81b60;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .video-section iframe {
+        height: 220px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="falling-effect" style="position:fixed; top:0; left:0; pointer-events:none; z-index:2;"></canvas>
+
+  <div class="container">
+    <h1>Teams 通过社区创建群组进行长时间通话</h1>
+
+    <!-- 第一个视频 -->
+    <div class="video-section">
+      <iframe src="https://www.youtube.com/embed/2KbJykxhjC8?vq=hd1080&rel=0" allowfullscreen></iframe>
+      <div class="video-description">
+        视频1简介：创建好社区，通过活动里面添加一个事件，创建群组。
+		<br>观看人群：创建者，普通用户可以不需要掌握
+			创建与第一次的设置，注意创建后不要取消社区活动，不要设置循环添加。
+		<br>备注1：不需要每个人都创建，建立群组的人创建即可。
+		<br>备注2：社区可以不加其他人
+		<br>备注3：群组名字不可修改 第一次创建就要想好
+      </div>
+    </div>
+
+    <!-- 第二个视频 -->
+    <div class="video-section">
+      <iframe src="https://www.youtube.com/embed/K1asXuqYJWg?vq=hd1080&rel=0" allowfullscreen></iframe>
+      <div class="video-description">
+        视频2简介：加入社区创建的群组
+		<br>观看人群：普通用户需要掌握
+		<br>第一次自己先加入通话 生成邀请链接，聊天框发送第一条消息聊天界面才显示群组
+      </div>
+    </div>
+
+    <!-- 第三个视频 -->
+    <div class="video-section">
+      <iframe src="https://www.youtube.com/embed/ecGMjwwjBwc?vq=hd1080&rel=0" allowfullscreen></iframe>
+      <div class="video-description">
+        视频3简介：群组通话界面的使用
+		<br>涉及到：呼叫人员、静音麦克风、共享画面、麦克风简单的设置、过滤查找群组、之后再加入群组
+      </div>
+    </div>
+
+    <!-- 第四个视频 -->
+    <div class="video-section">
+      <iframe src="https://www.youtube.com/embed/RAFoUei9cFE?vq=hd1080&rel=0" allowfullscreen></iframe>
+      <div class="video-description">
+        视频4简介：群组添加人员方法参考
+		<br>有时候添加的时候直接就进去群组了，不需要点接受。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h2>由于Teams不带录音录屏功能，咱们可以使用第三方工具（例如OBS）来辅助，OBS的操作方法参考 <a href="https://docs.google.com/document/d/1gyoyU39FEYgrfy04zoaaiKCFjfPhXvJ6gUCS_iD_4GU/edit?tab=t.0#heading=h.h49sg0q9bapf" target="_blank">点击进入</a><br>
+    更多相关安全推送 <a href="https://docs.google.com/document/d/1gyoyU39FEYgrfy04zoaaiKCFjfPhXvJ6gUCS_iD_4GU/edit?tab=t.0#heading=h.wc86u1w9mya0" target="_blank">点击进入</a><br> 🎀</h2>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("falling-effect");
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    let petals = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const petalImage = new Image();
+    petalImage.src = "sakura.png";
+
+    function createPetals() {
+      for (let i = 0; i < 20; i++) {
+        petals.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 10 + 10,
+          d: Math.random() * 2 + 1,
+          vx: Math.random() * 1 - 0.5,
+          vy: Math.random() * 1 + 0.5,
+          angle: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+
+    function drawPetals() {
+      ctx.clearRect(0, 0, width, height);
+      for (let p of petals) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.drawImage(petalImage, -p.r / 2, -p.r / 2, p.r, p.r);
+        ctx.restore();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.angle += 0.01;
+
+        if (p.y > height) {
+          p.y = -20;
+          p.x = Math.random() * width;
+        }
+      }
+      requestAnimationFrame(drawPetals);
+    }
+
+    petalImage.onload = () => {
+      createPetals();
+      drawPetals();
+    };
+  </script>
+</body>
+</html>
